@@ -9,7 +9,14 @@ const options_energie = ["Essence", "Diesel", "Electrique", "Hybride"];
 const options_kilometrage = ["5000 - 10000 km", "10000 - 15000 km", "15000 - 20000 km", "20000 - 25000 km", "25000 - 30000 km"];
 const options_annee = ["1960-1970", "1970 - 1990", "1990 - 2000", "2000 - 2010", "Après 2010"];
 const option_passager = ["1", "2", "3", "4"];
-
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
+// Add this middleware to parse JSON data in the request body
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..'))); // Serve static files (CSS, images, etc.) from the 'public' directory
 

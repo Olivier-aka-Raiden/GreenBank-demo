@@ -30,7 +30,7 @@
 						<label class="label"></label>
 					</div>
 				</div>
-				<form id="myform" name="myForm" class="fs-form fs-form-full" autocomplete="off" method="POST">
+				<form id="myform" name="myForm" class="fs-form fs-form-full" autocomplete="off" action="http://localhost:3000" method="POST">
 					<ol class="fs-fields">
 						<li>
 							<label class="fs-field-label fs-anim-upper" for="q1">Quel est votre nom ?</label>
@@ -107,10 +107,21 @@
 				form.addEventListener('submit', async (event) => {
 					event.preventDefault();
 					const formData = new FormData(event.target);
+					const nom = formData.get('nom');
+					const voiture = formData.get('voiture');
+					const energie = formData.get('energie');
+					const kilometrage = formData.get('kilometrage');
+					const annee = formData.get('annee');
+					const passager = formData.get('passager');
+					const body = {nom : nom, voiture: voiture, energie: energie, kilometrage: kilometrage, annee: annee, passager: passager};
+					console.log(body);
 					try {
 						const response = await fetch('http://localhost:3000', {
 							method: 'POST',
-							body: formData,
+							body: JSON.stringify(body), // Convert the object to a JSON string
+							headers: {
+								'Content-Type': 'application/json' // Set the content type to JSON
+							}
 						});
 
 						if (response.ok) {
