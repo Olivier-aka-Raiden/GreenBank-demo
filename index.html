@@ -8,7 +8,7 @@
 		<meta name="description" content="Fullscreen Form Interface: A distraction-free form concept with fancy animations" />
 		<meta name="keywords" content="fullscreen form, css animations, distraction-free, web design" />
 		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
@@ -30,7 +30,7 @@
 						<label class="label"></label>
 					</div>
 				</div>
-				<form id="myform" class="fs-form fs-form-full" autocomplete="off">
+				<form id="myform" name="myForm" class="fs-form fs-form-full" autocomplete="off" method="POST">
 					<ol class="fs-fields">
 						<li>
 							<label class="fs-field-label fs-anim-upper" for="q1">Quel est votre nom ?</label>
@@ -99,25 +99,7 @@
 		<script src="js/selectFx.js"></script>
 		<script src="js/fullscreenForm.js"></script>
 		<script>
-			(function() {
-				var formWrap = document.getElementById( 'fs-form-wrap' );
-				[].slice.call( document.querySelectorAll( 'select.dist-select.cs-select' ) ).forEach( function(el) {
-					new SelectFx( el, {
-						stickyPlaceholder: false,
-						onChange: function(val){
-							document.querySelector('span.cs-placeholder.dist-select').classList.add(val);
-						}
-					});
-				} );
-				[].slice.call( document.querySelectorAll( 'select.engine-select.cs-select' ) ).forEach( function(el) {
-					new SelectFx( el, {
-						stickyPlaceholder: false,
-						onChange: function(val){
-							document.querySelector('span.cs-placeholder').classList.add(val);
-						}
-					});
-				} );
-
+			document.addEventListener('DOMContentLoaded', () => {
 				// Get references to the input field and the welcome message div
 				const resultContainer = document.getElementById('result-container');
 				const result = document.getElementById('result');
@@ -144,6 +126,25 @@
 						console.error('An error occurred:', error);
 					}
 				});
+			});
+			(function() {
+				var formWrap = document.getElementById( 'fs-form-wrap' );
+				[].slice.call( document.querySelectorAll( 'select.dist-select.cs-select' ) ).forEach( function(el) {
+					new SelectFx( el, {
+						stickyPlaceholder: false,
+						onChange: function(val){
+							document.querySelector('span.cs-placeholder.dist-select').classList.add(val);
+						}
+					});
+				} );
+				[].slice.call( document.querySelectorAll( 'select.engine-select.cs-select' ) ).forEach( function(el) {
+					new SelectFx( el, {
+						stickyPlaceholder: false,
+						onChange: function(val){
+							document.querySelector('span.cs-placeholder').classList.add(val);
+						}
+					});
+				} );
 
 				new FForm( formWrap, {
 					onReview : function() {

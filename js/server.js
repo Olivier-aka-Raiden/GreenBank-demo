@@ -1,11 +1,8 @@
 const express = require('express');
 const logic = require('./logic'); // Import your logic module
-const cors = require('cors'); // Import the cors package
 const app = express();
 const port = 3000; // Choose your desired port number
 const path = require('path');
-// Use the cors middleware to enable CORS for all routes
-app.use(cors());
 // List of options
 const options_voiture = ["Citadine", "Cabriolet", "Berline", "SUV"];
 const options_energie = ["Essence", "Diesel", "Electrique", "Hybride"];
@@ -16,13 +13,16 @@ const option_passager = ["1", "2", "3", "4"];
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..'))); // Serve static files (CSS, images, etc.) from the 'public' directory
 
+app.get('/', (req, res) => {
+    console.log(__dirname + '/index.html')
+    res.sendFile(__dirname + '/index.html'); // Replace 'public' with the actual directory path
+});
 app.post('/', (req, res) => {
     const voiture_selected = req.body.voiture;
     const energie_selected = req.body.energie;
     const kilometrage_selected = req.body.kilometrage;
     const annee_selected = req.body.annee;
     const options_passager = req.body.passager;
-    console.log(req);
     console.log(voiture_selected);
     console.log(energie_selected);
     console.log(kilometrage_selected);
